@@ -1,19 +1,50 @@
 import React, { Component } from 'react';
 import './SearchBox.css';
+import store from '../redux/store';
 
 class SearchBox extends Component {
+
     state = {
-        searchLine: ''
+        searchLine: '',
+        data: null
     }
     searchLineChangeHandler = (e) => {
-        this.setState({ searchLine: e.target.value });
+        this.setState({ searchLine: e.target.value })
     }
     searchBoxSubmitHandler = (e) => {
         e.preventDefault();
     }
+    clickButtonSearch = (e) => {   
+        const apikey = 'c16ec1a3'; //Here is your API key: c16ec1a3
+        const search = this.state.searchLine;
+        const url = `http://www.omdbapi.com/?s=${search}&apikey=${apikey}`;//http://www.omdbapi.com/?s=${search}apikey=${apikey}
+        if(search === '') {
+            return
+        } else {
+            fetch(url)
+            .then((response) => response.json())
+            .then((data) => {
+            console.log(data)
+            store.dispatch({
+                type: 'ADD_FILM',
+                payload: {
+                  res: data.Search
+                }
+              }) 
+                this.setState({
+                    data: data.Search
+                })
+            }
+            );
+        } 
+    }
+    componentDidMount() {
+        const state = store.getState();
+        this.setState({ search: state.search });
+      }
+
     render() {
         const { searchLine } = this.state;
-
         return (
             <div className="search-box">
                 <form className="search-box__form" onSubmit={this.searchBoxSubmitHandler}>
@@ -31,11 +62,13 @@ class SearchBox extends Component {
                         type="submit"
                         className="search-box__form-submit"
                         disabled={!searchLine}
+                        onClick={this.clickButtonSearch}
                     >
                         Искать
                     </button>
                 </form>
             </div>
+            
         );
     }
 }
