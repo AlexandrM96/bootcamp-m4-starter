@@ -14,34 +14,33 @@ class SearchBox extends Component {
     searchBoxSubmitHandler = (e) => {
         e.preventDefault();
     }
-    clickButtonSearch = (e) => {   
+    clickButtonSearch = (e) => {
         const apikey = 'c16ec1a3'; //Here is your API key: c16ec1a3
         const search = this.state.searchLine;
         const url = `http://www.omdbapi.com/?s=${search}&apikey=${apikey}`;//http://www.omdbapi.com/?s=${search}apikey=${apikey}
-        if(search === '') {
+        if (search === '') {
             return
         } else {
             fetch(url)
-            .then((response) => response.json())
-            .then((data) => {
-            console.log(data)
-            store.dispatch({
-                type: 'ADD_FILM',
-                payload: {
-                  res: data.Search
+                .then((response) => response.json())
+                .then((data) => {
+                    store.dispatch({
+                        type: 'ADD_FILM',
+                        payload: {
+                            res: data.Search
+                        }
+                    })
+                    this.setState({
+                        data: data.Search
+                    })
                 }
-              }) 
-                this.setState({
-                    data: data.Search
-                })
-            }
-            );
-        } 
+                );
+        }
     }
     componentDidMount() {
         const state = store.getState();
         this.setState({ search: state.search });
-      }
+    }
 
     render() {
         const { searchLine } = this.state;
@@ -68,9 +67,9 @@ class SearchBox extends Component {
                     </button>
                 </form>
             </div>
-            
+
         );
     }
 }
- 
+
 export default SearchBox;

@@ -9,7 +9,7 @@ class MainPage extends Component {
     state = {
         result: ''
     }
-    
+
     render() {
         return (
             <div className="main-page">
@@ -18,7 +18,7 @@ class MainPage extends Component {
                     <section className="main-page__main-section">
                         <div className="main-page__search-box">
                             {/* Строка поиска и кнопка искать  */}
-                            <SearchBox searchRes = {this.state.searchLine} />
+                            <SearchBox searchRes={this.state.searchLine} />
                         </div>
                         <div className="main-page__movies">
                             {/* Отображение списка фильмов */}

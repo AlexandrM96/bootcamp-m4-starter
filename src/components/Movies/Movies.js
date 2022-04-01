@@ -5,14 +5,14 @@ import store from '../redux/store';
 
 class Movies extends Component {
     state = {
-        data: []
+        data: [],
     }
-  
-    componentDidMount = () => { 
+
+    componentDidMount = () => {
         store.subscribe(() => {
             const state = store.getState();
-            this.setState({ 
-                data: state.cart
+            this.setState({
+                data: state.newCart[0]
             });
         });
     };
@@ -22,7 +22,7 @@ class Movies extends Component {
             <ul className="movies">
                 {this.state.data.map((movie) => (
                     <li className="movies__item" key={movie.imdbID}>
-                       {movie.title} <MovieItem {...movie} />
+                        <MovieItem {...movie} />
                     </li>
                 ))}
             </ul>

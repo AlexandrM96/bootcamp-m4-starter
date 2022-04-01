@@ -17,6 +17,28 @@
     margin-bottom: 24px;
 }
 
+.favorites__element {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4px;
+}
+
+.favorites__del {
+    border: none;
+    background-color: #496DDB;
+    padding: 3px 7px;
+    color: #FFEEDB;
+    font-size: 14px;
+    transition: all 0.2s linear;
+}
+
+.favorites__del:hover {
+    cursor: pointer;
+    opacity: 0.9;
+    transition: all 0.2s linear;
+}
+
 .favorites__save {
     border: none;
     background-color: #496DDB;
