@@ -53,3 +53,12 @@
     opacity: 0.9;
     transition: all 0.2s linear;
 }
+
+.favorites__save-disabled {
+    border: none;
+    background-color: #a0b2e7;
+    padding: 10px 15px;
+    color: #FFEEDB;
+    font-size: 14px;
+    transition: all 0.2s linear;
+}

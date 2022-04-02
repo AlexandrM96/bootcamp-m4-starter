@@ -1,6 +1,8 @@
 .header {
     background: #496DDB;
     padding: 20px calc(50% - 500px) 10px;
+    display: flex;
+    justify-content: space-between;
 }
 
 .header__title {
@@ -8,4 +10,21 @@
     color: #FFEEDB;
     font-size: 45px;
     margin-left: 40px;
+}
+
+.header__list {
+    display: flex;
+}
+
+.header__list-item {
+    font-family: 'Luckiest Guy', cursive;
+    font-size: 30px;
+    color: #FFEEDB;
+    margin-left: 30px;
+    margin-top: 5px;
+}
+
+.header__list-link {
+    color: #FFEEDB;
+    text-decoration: none;
 }

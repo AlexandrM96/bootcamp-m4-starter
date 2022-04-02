@@ -4,10 +4,47 @@ import store from '../redux/store';
 
 class Favorites extends Component {
     state = {
-        title: 'Новый список',
-        movies: [
-            { imdbID: 'tt0068646', title: 'The Godfather', year: 1972 }
-        ]
+        title: '',
+        movies: [],
+    }
+
+    newListChangeHandler = (e) => {
+        this.setState({ title: e.target.value });
+    }
+
+    clickSave = () => {
+        console.log('click');
+        const url = `https://acb-api.algoritmika.org/api/movies/list`;
+        const data = this.state;
+        fetch(url, {
+            method: 'POST', // or 'PUT'
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log('пост запрос', data)
+                store.dispatch({
+                    type: 'ADD_List_FILM_ID',
+                    payload: {
+                        idFilm: data
+                    }
+                })
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+    }
+
+    clickDel = (imdbID) => {
+        store.dispatch({
+            type: 'REMOVE_FILM',
+            payload: {
+                id: imdbID
+            }
+        })
     }
 
     componentDidMount = () => {
@@ -21,13 +58,26 @@ class Favorites extends Component {
     render() {
         return (
             <div className="favorites">
-                <input value="Новый список" className="favorites__name" />
+                <input
+                    onChange={this.newListChangeHandler}
+                    type="text"
+                    placeholder="Введите название списка"
+                    className="favorites__name"
+                />
                 <ul className="favorites__list">
                     {this.state.movies.map((item) => {
-                        return <li className='favorites__element' key={item.id}>{item.Title} ({item.Year})<button className='favorites__del'>X</button></li>;
+                        return <li className='favorites__element' key={item.imdbID}>
+                            {item.Title} ({item.Year})
+                            <button onClick={() => this.clickDel(item.imdbID)} className='favorites__del'>X</button></li>;
                     })}
                 </ul>
-                <button type="button" className="favorites__save">Сохранить список</button>
+                <button
+                    onClick={this.clickSave}
+                    disabled={this.state.title === ''}
+                    type="button"
+                    className={this.state.title === '' ? "favorites__save-disabled" : "favorites__save"}>
+                    Сохранить список
+                </button>
             </div>
         );
     }

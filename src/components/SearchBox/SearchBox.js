@@ -37,10 +37,6 @@ class SearchBox extends Component {
                 );
         }
     }
-    componentDidMount() {
-        const state = store.getState();
-        this.setState({ search: state.search });
-    }
 
     render() {
         const { searchLine } = this.state;
