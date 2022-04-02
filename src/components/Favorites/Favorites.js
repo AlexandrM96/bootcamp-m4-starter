@@ -73,9 +73,12 @@ class Favorites extends Component {
                 </ul>
                 <button
                     onClick={this.clickSave}
-                    disabled={this.state.title === ''}
+                    disabled={this.state.title === '' || +this.state.movies.length === 0}
                     type="button"
-                    className={this.state.title === '' ? "favorites__save-disabled" : "favorites__save"}>
+                    className={
+                        this.state.title === '' || +this.state.movies.length === 0 ?
+                            "favorites__save-disabled" : "favorites__save"
+                    }>
                     Сохранить список
                 </button>
             </div>
