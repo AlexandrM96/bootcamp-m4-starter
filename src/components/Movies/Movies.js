@@ -5,7 +5,7 @@ import store from '../redux/store';
 
 class Movies extends Component {
     state = {
-        data: [],
+        data: []
     }
 
     componentDidMount = () => {
@@ -15,6 +15,7 @@ class Movies extends Component {
                 data: state.newCart[0]
             });
         });
+
     };
 
     render() {

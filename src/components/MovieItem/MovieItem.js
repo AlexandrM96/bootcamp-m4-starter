@@ -3,9 +3,19 @@ import './MovieItem.css';
 import store from '../redux/store';
 
 class MovieItem extends Component {
+    LoadStart = (e) => {
+        console.log('старт')
+        store.dispatch({
+            type: 'LOADING_STATUS',
+            payload: {
+                load: true
+            }
+        }
+        )
+    }
 
     clickButtonAddList = (imdbID) => {
-        // console.log('добавил',{imdbID});
+        this.LoadStart();
         const apikey = 'c16ec1a3'; //Here is your API key: c16ec1a3
         const search = imdbID.imdbID;
         const url = `http://www.omdbapi.com/?i=${search}&apikey=${apikey}`;//http://www.omdbapi.com/?s=${search}apikey=${apikey}
@@ -15,7 +25,8 @@ class MovieItem extends Component {
                 store.dispatch({
                     type: 'ADD_List_FILM',
                     payload: {
-                        imdbID: data
+                        imdbID: data,
+                        load: false
                     }
                 })
             }

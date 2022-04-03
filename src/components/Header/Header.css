@@ -30,16 +30,16 @@
 }
 
 
-.down__container {
+.load__container {
     position: absolute;
     right: 60%;
 }
 
-.not-down__container {
+.not-load__container {
     display: none;
 }
 
-.down__img {
+.load__img {
   animation-name: rotation;
   animation-duration: 1s;
   animation-iteration-count: infinite;

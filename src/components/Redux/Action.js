@@ -18,3 +18,8 @@ const remFilm = {
     type: 'REMOVE_FILM',
     text: 'Remove Film'
 }
+
+const load = {
+    type: 'LOADING_STATUS',
+    text: 'load'
+}

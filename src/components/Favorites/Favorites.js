@@ -12,8 +12,20 @@ class Favorites extends Component {
         this.setState({ title: e.target.value });
     }
 
+    LoadStart = (e) => {
+        console.log('старт')
+        store.dispatch({
+            type: 'LOADING_STATUS',
+            payload: {
+                load: true
+            }
+        }
+        )
+    }
+
     clickSave = () => {
         console.log('click');
+        this.LoadStart();
         const url = `https://acb-api.algoritmika.org/api/movies/list`;
         const data = this.state;
         fetch(url, {
@@ -29,7 +41,8 @@ class Favorites extends Component {
                 store.dispatch({
                     type: 'ADD_List_FILM_ID',
                     payload: {
-                        idFilm: data
+                        idFilm: data,
+                        load: false
                     }
                 })
             })
