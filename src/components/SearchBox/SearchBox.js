@@ -8,7 +8,7 @@ class SearchBox extends Component {
         searchLine: '',
         data: null
     }
-    
+
     searchLineChangeHandler = (e) => {
         this.setState({ searchLine: e.target.value });
     }
@@ -36,7 +36,6 @@ class SearchBox extends Component {
         fetch(url)
             .then((response) => response.json())
             .then((data) => {
-                console.log(data)
                 store.dispatch({
                     type: 'ADD_FILM',
                     payload: {

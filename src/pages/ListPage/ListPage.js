@@ -5,12 +5,11 @@ import store from '../../components/redux/store';
 class ListPage extends Component {
     state = {
         movies: [
-            { title: 'The Godfather', year: 1972, imdbID: 'tt0068646' }
+            // { title: 'The Godfather', year: 1972, imdbID: 'tt0068646' }
         ]
     }
 
     componentDidMount = () => {
-        console.log('qwde',store,store.subscribe)
         store.subscribe(() => {
             const state = store.getState();
             console.log('listPage', state, state.newIdlistFilm);
@@ -19,15 +18,14 @@ class ListPage extends Component {
             });
         });
 
-        // const id = this.props.match.params;
-        // console.log(id);
-        // const url = `https://acb-api.algoritmika.org/api/movies/list/${id}`;
-        // fetch(url)
-        //     .then((response) => response.json())
-        //     .then((data) => {
-        //         console.log(data);
-        //     }
-        //     );
+        const id = this.props.match.params.id;
+        const url = `https://acb-api.algoritmika.org/api/movies/list/${id}`;
+        fetch(url)
+            .then((response) => response.json())
+            .then((data) => {
+                this.setState({ movies: data.movies })
+            }
+            );
         // TODO: запрос к сервер на получение списка
         // TODO: запросы к серверу по всем imdbID
     };
@@ -40,7 +38,7 @@ class ListPage extends Component {
                     {this.state.movies.map((item) => {
                         return (
                             <li key={item.imdbID}>
-                                <a href='https://www.imdb.com/title/tt0068646/' target='_blank'>{item.title} ({item.year})</a>
+                                <a href={`https://www.imdb.com/title/${item.imdbID}/`} target='_blank'>{item.Title} ({item.Year})</a>
                             </li>
                         );
                     })}

@@ -26,7 +26,6 @@ class Favorites extends Component {
     }
 
     clickSave = () => {
-        console.log('click');
         this.LoadStart();
         const url = `https://acb-api.algoritmika.org/api/movies/list`;
         const data = this.state;
@@ -47,7 +46,10 @@ class Favorites extends Component {
                         load: false
                     }
                 })
-                this.setState({ link: true });
+                this.setState({
+                    listId: data.id,
+                    link: true
+                });
             })
             .catch((error) => {
                 console.error('Error:', error);
@@ -89,9 +91,8 @@ class Favorites extends Component {
                     })}
                 </ul>
                 {this.state.link === true ?
-                    // <Link to="/list/:id" className='favorites__link'>Перейти к списку</Link>
-                    this.props.history.push('/list/:id')
-
+                    <Link to={`/list/${this.state.listId}`}
+                        className='favorites__link'>Перейти к списку</Link>
                     :
                     <button
                         onClick={this.clickSave}

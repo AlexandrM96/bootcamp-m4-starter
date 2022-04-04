@@ -4,7 +4,6 @@ import store from '../redux/store';
 
 class MovieItem extends Component {
     LoadStart = (e) => {
-        console.log('старт')
         store.dispatch({
             type: 'LOADING_STATUS',
             payload: {
