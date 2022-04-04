@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import './Favorites.css';
 import store from '../redux/store';
+import { Link } from 'react-router-dom';
 
 class Favorites extends Component {
     state = {
         title: '',
         movies: [],
+        link: false
     }
 
     newListChangeHandler = (e) => {
@@ -45,10 +47,12 @@ class Favorites extends Component {
                         load: false
                     }
                 })
+                this.setState({ link: true });
             })
             .catch((error) => {
                 console.error('Error:', error);
             });
+
     }
 
     clickDel = (imdbID) => {
@@ -84,16 +88,22 @@ class Favorites extends Component {
                             <button onClick={() => this.clickDel(item.imdbID)} className='favorites__del'>X</button></li>;
                     })}
                 </ul>
-                <button
-                    onClick={this.clickSave}
-                    disabled={this.state.title === '' || +this.state.movies.length === 0}
-                    type="button"
-                    className={
-                        this.state.title === '' || +this.state.movies.length === 0 ?
-                            "favorites__save-disabled" : "favorites__save"
-                    }>
-                    Сохранить список
-                </button>
+                {this.state.link === true ?
+                    // <Link to="/list/:id" className='favorites__link'>Перейти к списку</Link>
+                    this.props.history.push('/list/:id')
+
+                    :
+                    <button
+                        onClick={this.clickSave}
+                        disabled={this.state.title === '' || +this.state.movies.length === 0}
+                        type="button"
+                        className={
+                            this.state.title === '' || +this.state.movies.length === 0 ?
+                                "favorites__save-disabled" : "favorites__save"
+                        }>
+                        Сохранить список
+                    </button>}
+
             </div>
         );
     }

@@ -5,14 +5,15 @@ import store from '../../components/redux/store';
 class ListPage extends Component {
     state = {
         movies: [
-            // { title: 'The Godfather', year: 1972, imdbID: 'tt0068646' }
+            { title: 'The Godfather', year: 1972, imdbID: 'tt0068646' }
         ]
     }
 
     componentDidMount = () => {
+        console.log('qwde',store,store.subscribe)
         store.subscribe(() => {
             const state = store.getState();
-            console.log('listPage', state.newIdlistFilm);
+            console.log('listPage', state, state.newIdlistFilm);
             this.setState({
                 movies: state.newIdlistFilm
             });
