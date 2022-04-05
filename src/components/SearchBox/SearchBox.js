@@ -19,7 +19,6 @@ class SearchBox extends Component {
     }
 
     LoadStart = (e) => {
-        console.log('старт')
         store.dispatch({
             type: 'LOADING_STATUS',
             payload: {

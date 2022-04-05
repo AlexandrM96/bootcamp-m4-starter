@@ -11,7 +11,7 @@ class Movies extends Component {
     componentDidMount = () => {
         store.subscribe(() => {
             const state = store.getState();
-            this.setState({
+            state.newCart && this.setState({
                 data: state.newCart[0]
             });
         });

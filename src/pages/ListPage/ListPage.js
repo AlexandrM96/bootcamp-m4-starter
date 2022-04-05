@@ -1,18 +1,17 @@
 import React, { Component } from 'react';
 import './ListPage.css';
 import store from '../../components/redux/store';
+import Header from '../../components/Header/Header';
 
 class ListPage extends Component {
     state = {
-        movies: [
-            // { title: 'The Godfather', year: 1972, imdbID: 'tt0068646' }
-        ]
+        movies: [],
+        title: ''
     }
 
     componentDidMount = () => {
         store.subscribe(() => {
             const state = store.getState();
-            console.log('listPage', state, state.newIdlistFilm);
             this.setState({
                 movies: state.newIdlistFilm
             });
@@ -23,7 +22,10 @@ class ListPage extends Component {
         fetch(url)
             .then((response) => response.json())
             .then((data) => {
-                this.setState({ movies: data.movies })
+                this.setState({
+                    movies: data.movies,
+                    title: data.title
+                })
             }
             );
         // TODO: запрос к сервер на получение списка
@@ -32,18 +34,26 @@ class ListPage extends Component {
 
     render() {
         return (
-            <div className="list-page">
-                <h1 className="list-page__title">Мой список</h1>
-                <ul>
-                    {this.state.movies.map((item) => {
-                        return (
-                            <li key={item.imdbID}>
-                                <a href={`https://www.imdb.com/title/${item.imdbID}/`} target='_blank'>{item.Title} ({item.Year})</a>
-                            </li>
-                        );
-                    })}
-                </ul>
-            </div>
+            <>
+                <div className="main-page">
+                    <Header />
+                </div>
+                <div className="list-page">
+                    <h1 className="list-page__title">Мой список</h1>
+                    <div className='list-page__container'>
+                        <h2 className='list-page__container-title'>{this.state.title}</h2>
+                        <ul>
+                            {this.state.movies.map((item) => {
+                                return (
+                                    <li key={item.imdbID}>
+                                        <a href={`https://www.imdb.com/title/${item.imdbID}/`} target='_blank'>{item.Title} ({item.Year})</a>
+                                    </li>
+                                );
+                            })}
+                        </ul>
+                    </div>
+                </div>
+            </>
         );
     }
 }

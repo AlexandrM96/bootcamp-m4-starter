@@ -16,6 +16,7 @@ function reducer(state = initialState, action) {
         case 'ADD_List_FILM':
             const addFilm = action.payload.imdbID;
             const loadingTwo = action.payload.load;
+            if (state.addListFilm.find((item) => item.imdbID === addFilm.imdbID)) return { ...state, flag: loadingTwo }
             // const NewAddListFilm = [...state.addListFilm, addFilm]
             const NewAddListFilm = state.addListFilm.push(addFilm);
             return { ...state, NewAddListFilm, flag: loadingTwo }
@@ -23,7 +24,6 @@ function reducer(state = initialState, action) {
             const idlistFilm = action.payload.idFilm;
             const loadingThree = action.payload.load;
             const newIdlistFilm = [...state.idListFilm, idlistFilm];
-            console.log('новый массив', newIdlistFilm)
             return { ...state, newIdlistFilm, flag: loadingThree };
         case 'REMOVE_FILM':
             const delFilm = action.payload.id
@@ -31,7 +31,6 @@ function reducer(state = initialState, action) {
                 item.imdbID !== delFilm)
             return { ...state, addListFilm: NewDelFilm }
         case 'LOADING_STATUS':
-            console.log(action.payload.load);
             const loading = action.payload.load;
             return { ...state, flag: loading }
         default:
