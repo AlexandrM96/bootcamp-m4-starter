@@ -2,7 +2,11 @@ const initialState = {
     film: [],
     addListFilm: [],
     idListFilm: [],
-    flag: false
+    moviesListPage: [],
+    titleListPage: '',
+    flag: false,
+    Link: false,
+    ID: ''
 }
 
 function reducer(state = initialState, action) {
@@ -21,10 +25,18 @@ function reducer(state = initialState, action) {
             const NewAddListFilm = state.addListFilm.push(addFilm);
             return { ...state, NewAddListFilm, flag: loadingTwo }
         case 'ADD_List_FILM_ID':
+            const id = action.payload.idFilm.id;
+            const link = action.payload.link;
             const idlistFilm = action.payload.idFilm;
             const loadingThree = action.payload.load;
             const newIdlistFilm = [...state.idListFilm, idlistFilm];
-            return { ...state, newIdlistFilm, flag: loadingThree };
+            return { ...state, newIdlistFilm, flag: loadingThree, Link: link, ID: id };
+        case 'FILM_LIST_PAGE':
+            const list = action.payload.movies.movies;
+            const title = action.payload.movies.title;
+            const loadFour = action.payload.load;
+            const newListListPage = [...state.moviesListPage, list];
+            return { ...state, newListListPage, titleListPage: title, flag: loadFour }
         case 'REMOVE_FILM':
             const delFilm = action.payload.id
             let NewDelFilm = [...state.addListFilm].filter((item) =>

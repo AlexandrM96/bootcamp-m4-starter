@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './ListPage.css';
 import store from '../../components/redux/store';
 import Header from '../../components/Header/Header';
+import { ListPageApi } from '../../api/API';
 
 class ListPage extends Component {
     state = {
@@ -9,25 +10,28 @@ class ListPage extends Component {
         title: ''
     }
 
+    LoadStart = (e) => {
+        store.dispatch({
+            type: 'LOADING_STATUS',
+            payload: {
+                load: true
+            }
+        }
+        )
+    }
+
     componentDidMount = () => {
+        this.LoadStart();
+        const id = this.props.match.params.id;
+        ListPageApi(id);
         store.subscribe(() => {
             const state = store.getState();
             this.setState({
-                movies: state.newIdlistFilm
+                movies: state.newListListPage[0],
+                title: state.titleListPage
             });
-        });
 
-        const id = this.props.match.params.id;
-        const url = `https://acb-api.algoritmika.org/api/movies/list/${id}`;
-        fetch(url)
-            .then((response) => response.json())
-            .then((data) => {
-                this.setState({
-                    movies: data.movies,
-                    title: data.title
-                })
-            }
-            );
+        });
         // TODO: запрос к сервер на получение списка
         // TODO: запросы к серверу по всем imdbID
     };

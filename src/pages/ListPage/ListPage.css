@@ -20,4 +20,6 @@
 
 .list-page__container-title {
   font-size: 25px;
+  text-align: center;
+  margin-bottom: 10px;
 }

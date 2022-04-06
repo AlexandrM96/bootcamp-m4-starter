@@ -23,3 +23,7 @@ const load = {
     type: 'LOADING_STATUS',
     text: 'load'
 }
+const listPage = {
+    type: 'FILM_LIST_PAGE',
+    text: 'list page'
+}

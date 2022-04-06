@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './MovieItem.css';
 import store from '../redux/store';
+import { MoviItemApi } from '../../api/API';
 
 class MovieItem extends Component {
     LoadStart = (e) => {
@@ -15,23 +16,10 @@ class MovieItem extends Component {
 
     clickButtonAddList = (imdbID) => {
         this.LoadStart();
-        const apikey = 'c16ec1a3'; //Here is your API key: c16ec1a3
         const search = imdbID.imdbID;
-        const url = `http://www.omdbapi.com/?i=${search}&apikey=${apikey}`;//http://www.omdbapi.com/?s=${search}apikey=${apikey}
-        fetch(url)
-            .then((response) => response.json())
-            .then((data) => {
-                store.dispatch({
-                    type: 'ADD_List_FILM',
-                    payload: {
-                        imdbID: data,
-                        load: false
-                    }
-                })
-            }
-            );
-
+        MoviItemApi(search);
     }
+
     render() {
         const { Title, Year, Poster, imdbID } = this.props;
         return (

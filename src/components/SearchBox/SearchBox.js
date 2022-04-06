@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import './SearchBox.css';
 import store from '../redux/store';
-
+import { SearchBoxApi } from '../../api/API';
 class SearchBox extends Component {
 
     state = {
-        searchLine: '',
-        data: null
+        searchLine: ''
     }
 
     searchLineChangeHandler = (e) => {
@@ -29,25 +28,9 @@ class SearchBox extends Component {
     }
 
     clickButtonSearch = (e) => {
-        const apikey = 'c16ec1a3'; //Here is your API key: c16ec1a3
-        const search = this.state.searchLine;
-        const url = `http://www.omdbapi.com/?s=${search}&apikey=${apikey}`;//http://www.omdbapi.com/?s=${search}apikey=${apikey}
-        fetch(url)
-            .then((response) => response.json())
-            .then((data) => {
-                store.dispatch({
-                    type: 'ADD_FILM',
-                    payload: {
-                        res: data.Search,
-                       load: false
-                    }
-                })
-                this.setState({
-                    data: data.Search
-                })
-            }
-            );
+        SearchBoxApi(this.state.searchLine);
     }
+
     render() {
         const { searchLine } = this.state;
         return (

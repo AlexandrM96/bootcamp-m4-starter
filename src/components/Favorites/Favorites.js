@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 import './Favorites.css';
 import store from '../redux/store';
 import { Link } from 'react-router-dom';
+import { FavoritsApi } from '../../api/API';
 
 class Favorites extends Component {
     state = {
         title: '',
         movies: [],
-        link: false
+        link: false,
+        idFilmList: ''
     }
 
     newListChangeHandler = (e) => {
@@ -26,34 +28,8 @@ class Favorites extends Component {
 
     clickSave = () => {
         this.LoadStart();
-        const url = `https://acb-api.algoritmika.org/api/movies/list`;
         const data = this.state;
-        fetch(url, {
-            method: 'POST', // or 'PUT'
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data),
-        })
-            .then(response => response.json())
-            .then(data => {
-                console.log('пост запрос', data)
-                store.dispatch({
-                    type: 'ADD_List_FILM_ID',
-                    payload: {
-                        idFilm: data,
-                        load: false
-                    }
-                })
-                this.setState({
-                    listId: data.id,
-                    link: true
-                });
-            })
-            .catch((error) => {
-                console.error('Error:', error);
-            });
-
+        FavoritsApi(data);
     }
 
     clickDel = (imdbID) => {
@@ -69,7 +45,9 @@ class Favorites extends Component {
         store.subscribe(() => {
             const state = store.getState();
             this.setState({
-                movies: state.addListFilm
+                movies: state.addListFilm,
+                link: state.Link,
+                idFilmList: state.ID
             });
         });
     };
@@ -90,7 +68,7 @@ class Favorites extends Component {
                     })}
                 </ul>
                 {this.state.link === true ?
-                    <Link to={`/list/${this.state.listId}`}
+                    <Link to={`/list/${this.state.idFilmList}`}
                         className='favorites__link'>Перейти к списку</Link>
                     :
                     <button
