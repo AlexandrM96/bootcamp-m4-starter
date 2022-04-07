@@ -21,7 +21,7 @@ class Movies extends Component {
     render() {
         return (
             <ul className="movies">
-                {this.state.data.map((movie) => (
+                {this.state.data && this.state.data.map((movie) => (
                     <li className="movies__item" key={movie.imdbID}>
                         <MovieItem {...movie} />
                     </li>

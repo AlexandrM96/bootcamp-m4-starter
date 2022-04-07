@@ -52,6 +52,7 @@ class Favorites extends Component {
         });
     };
     render() {
+        if(!this.state) return ;
         return (
             <div className="favorites">
                 <input
@@ -61,7 +62,7 @@ class Favorites extends Component {
                     className="favorites__name"
                 />
                 <ul className="favorites__list">
-                    {this.state.movies.map((item) => {
+                    {this.state.movies && this.state.movies.map((item) => {
                         return <li className='favorites__element' key={item.imdbID}>
                             {item.Title} ({item.Year})
                             <button onClick={() => this.clickDel(item.imdbID)} className='favorites__del'>X</button></li>;

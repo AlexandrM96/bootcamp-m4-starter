@@ -36,7 +36,7 @@ function reducer(state = initialState, action) {
             const title = action.payload.movies.title;
             const loadFour = action.payload.load;
             const newListListPage = [...state.moviesListPage, list];
-            return { ...state, newListListPage, titleListPage: title, flag: loadFour }
+            return { ...state, newListListPage, titleListPage: title, flag: loadFour, addListFilm: [], Link: false }
         case 'REMOVE_FILM':
             const delFilm = action.payload.id
             let NewDelFilm = [...state.addListFilm].filter((item) =>

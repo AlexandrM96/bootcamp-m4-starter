@@ -7,14 +7,16 @@ import store from '../redux/store';
 class Header extends Component {
 
     state = {
-        Loading: false
+        Loading: false,
+        idLink : ':id'
     }
 
     componentDidMount = () => {
         store.subscribe(() => {
             const state = store.getState();
             this.setState({
-                Loading: state.flag
+                Loading: state.flag,
+                idLink: state.ID
             });
         });
     };
@@ -32,7 +34,7 @@ class Header extends Component {
                     <Link className="header__list-link" to="/">Поиск</Link>                        
                     </li>
                     <li className="header__list-item">
-                    <Link className="header__list-link" to="/list/:id">Мой список</Link>
+                    <Link className="header__list-link" to={`/list/${this.state.idLink}`}>Мой список</Link>
                     </li>
                 </ul>
             </header>
