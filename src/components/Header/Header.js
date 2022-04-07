@@ -21,6 +21,11 @@ class Header extends Component {
         });
     };
     render() {
+        if(this.state.idLink === '') {
+            this.setState({
+                idLink: ':id'
+            });
+        }
         return (
             <header className="header">
                 <h1 className="header__title">
