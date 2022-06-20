@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/bootcamp-m4-starter/static/css/main.84ac334f.chunk.css",
+    "main.js": "/bootcamp-m4-starter/static/js/main.ac523ba7.chunk.js",
+    "main.js.map": "/bootcamp-m4-starter/static/js/main.ac523ba7.chunk.js.map",
+    "runtime-main.js": "/bootcamp-m4-starter/static/js/runtime-main.abf562ea.js",
+    "runtime-main.js.map": "/bootcamp-m4-starter/static/js/runtime-main.abf562ea.js.map",
+    "static/js/2.15b6790f.chunk.js": "/bootcamp-m4-starter/static/js/2.15b6790f.chunk.js",
+    "static/js/2.15b6790f.chunk.js.map": "/bootcamp-m4-starter/static/js/2.15b6790f.chunk.js.map",
+    "index.html": "/bootcamp-m4-starter/index.html",
+    "precache-manifest.ee763874fc06d92a34b15499ac539bb3.js": "/bootcamp-m4-starter/precache-manifest.ee763874fc06d92a34b15499ac539bb3.js",
+    "service-worker.js": "/bootcamp-m4-starter/service-worker.js",
+    "static/css/main.84ac334f.chunk.css.map": "/bootcamp-m4-starter/static/css/main.84ac334f.chunk.css.map",
+    "static/js/2.15b6790f.chunk.js.LICENSE.txt": "/bootcamp-m4-starter/static/js/2.15b6790f.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.abf562ea.js",
+    "static/js/2.15b6790f.chunk.js",
+    "static/css/main.84ac334f.chunk.css",
+    "static/js/main.ac523ba7.chunk.js"
+  ]
+}
