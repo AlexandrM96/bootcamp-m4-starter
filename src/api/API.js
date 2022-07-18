@@ -17,7 +17,10 @@ export function SearchBoxApi(ResultState) {
                 }
             })
         }
-        );
+        )
+        .catch((error) => {
+            console.error('Error:', error);
+        });
 }
 
 //запрос для MoviItem
@@ -36,7 +39,10 @@ export function MoviItemApi(search) {
                 }
             })
         }
-        );
+        )
+        .catch((error) => {
+            console.error('Error:', error);
+        });
 
 }
 
@@ -83,5 +89,8 @@ export function ListPageApi(id) {
                 }
             })
         }
-        );
+        )
+        .catch((error) => {
+            console.error('Error:', error);
+        });
 }
